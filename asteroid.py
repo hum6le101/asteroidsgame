@@ -18,7 +18,16 @@ class Asteroid(CircleShape):
             return
         else:
             angle = random.uniform(20,50)
-            asteroid1 = Asteroid(self.position.x, self.position.y, self.radius - ASTEROID_MIN_RADIUS)
-            asteroid2 = Asteroid(self.position.x, self.position.y, self.radius - ASTEROID_MIN_RADIUS)
-            asteroid1.velocity = pygame.math.Vector2.rotate(self.velocity, angle) * 1.2 
-            asteroid2.velocity = pygame.math.Vector2.rotate(self.velocity, -angle) * 1.2
+            #spwanlogic for new asteroids
+            child_radius = self.radius - ASTEROID_MIN_RADIUS
+            new_velocity1 = pygame.math.Vector2.rotate(self.velocity, angle) * 1.2
+            direction1 = new_velocity1.normalize()
+            offset_position1 = self.position + direction1 * child_radius * 2
+            new_asteroid1 = Asteroid(offset_position1.x, offset_position1.y, child_radius)
+            new_asteroid1.velocity = new_velocity1
+            new_velocity2 = pygame.math.Vector2.rotate(self.velocity, -angle) * 1.2
+            direction2 = new_velocity2.normalize()
+            offset_position2 = self.position + direction2 * child_radius * 2
+            new_asteroid2 = Asteroid(offset_position2.x, offset_position2.y, child_radius)
+            new_asteroid2.velocity = new_velocity2
+

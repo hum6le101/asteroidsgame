@@ -44,8 +44,6 @@ class Player(CircleShape):
             
     
     def shoot(self, dt):
-        
-        testvar = True
         if self.dt_shot <= 0:
                 self.dt_shot = PLAYER_SHOOT_COOLDOWN
                 shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
